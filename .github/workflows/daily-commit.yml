@@ -1,0 +1,20 @@
+name: Daily DevSync Update
+on:
+  schedule:
+    - cron: '30 2 * * *'  # EXACT TIME REQUIRED
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Step by 23f2004957@ds.study.iitm.ac.in
+      run: echo "$(date)" > status.txt
+    - run: |
+        git config user.email "23f2004957@ds.study.iitm.ac.in"
+        git config user.name "DevSync"
+        git add status.txt
+        git commit -m "daily update"
+        git push
